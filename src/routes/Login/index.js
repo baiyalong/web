@@ -1,7 +1,4 @@
-import React from 'react'
 
-export default React.createClass({
-  render() {
-    return <div>Login</div>
-  }
-})
+import LoginRoute from './route'
+
+export default LoginRoute

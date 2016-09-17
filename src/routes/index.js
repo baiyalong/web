@@ -3,7 +3,7 @@ import RootLayout from '../layouts/RootLayout'
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
-import Login from './Login'
+import LoginRoute from './Login'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -13,10 +13,8 @@ export const createRoutes = (store) => ({
   component: RootLayout,
   // indexRoute: Home,
   childRoutes: [
+    LoginRoute(store),
     {
-      path: 'login',
-      component: Login
-    }, {
       path: 'home',
       component: CoreLayout,
       indexRoute: Home,
