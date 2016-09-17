@@ -13,7 +13,7 @@ const initState = Immutable.fromJS({
     error: null
 })
 
-function loginReducer(state = initState, action) {
+function LoginReducer(state = initState, action) {
     switch (action.type) {
         case LOGIN_REQUEST:
             return state.set('isFetching', true).set('username', null).set('token', null).set('error', null)
@@ -31,4 +31,4 @@ function loginReducer(state = initState, action) {
 // })
 
 
-export default loginReducer;
+export default LoginReducer;

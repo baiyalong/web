@@ -55,7 +55,7 @@ class LoginView extends Component {
 
 LoginView.propTypes = {
   title: PropTypes.string.isRequired,
-  login: PropTypes.func
+  login: PropTypes.func.isRequired
 }
 
 LoginView.defaultProps = {
