@@ -1,5 +1,6 @@
 // We only need to import the modules necessary for initial render
-import CoreLayout from '../layouts/CoreLayout/CoreLayout'
+import RootLayout from '../layouts/RootLayout'
+import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
 import Login from './Login'
@@ -8,17 +9,19 @@ import Login from './Login'
     PlainRoute objects to build route definitions.   */
 
 export const createRoutes = (store) => ({
+  path: '/',
+  component: RootLayout,
+  // indexRoute: Home,
   childRoutes: [
     {
       path: 'login',
       component: Login
     }, {
-      path: '/',
+      path: 'home',
       component: CoreLayout,
       indexRoute: Home,
       childRoutes: [
         CounterRoute(store),
-
       ]
     }
   ]
