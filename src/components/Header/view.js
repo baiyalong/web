@@ -13,7 +13,7 @@ class HeaderView extends Component {
   logoutConfirm() {
     this.setState({ confirm: true })
   }
-  confirmCallback(b) {
+  logout(b) {
     this.setState({ confirm: false })
     if (b) this.props.logoutAndRedirect()
   }
@@ -22,7 +22,7 @@ class HeaderView extends Component {
       open: this.state.confirm,
       title: '注销',
       content: '确认要注销吗？',
-      callback: (b) => this.confirmCallback(b)
+      callback: (b) => this.logout(b)
     }
 
     return (

@@ -11,11 +11,6 @@ injectTapEventPlugin();
 
 
 class AppContainer extends Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    routes: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
-  }
 
   render() {
     const { history, routes, store } = this.props
@@ -28,6 +23,12 @@ class AppContainer extends Component {
       </MuiThemeProvider>
     )
   }
+}
+
+AppContainer.propTypes = {
+  history: PropTypes.object.isRequired,
+  routes: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 }
 
 export default AppContainer

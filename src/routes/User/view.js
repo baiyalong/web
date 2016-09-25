@@ -14,7 +14,7 @@ class UserView extends Component {
             colNames: this.props.colNames,
             rowValues: this.props.rowValues,
             create: () => this.props.create(),
-            delete: () => this.props.remove(),
+            delete: (a) => this.props.remove(a),
             update: () => this.props.update(),
             retrieve: (s) => this.props.retrieve(s),
         }

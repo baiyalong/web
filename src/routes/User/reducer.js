@@ -14,25 +14,59 @@ const initState = Immutable.fromJS({
     state: null,    //request,success,error
     action: null,    //create,delete,update,retrieve
     error: null,    //error message
-    colNames: [
-        { code: 'username', name: '用户名' },
-        { code: 'role', name: '角色' },
-        { code: 'description', name: '描述' }
+    modal: false,
+    dict: [
+        {
+            code: 'username',
+            name: '用户名',
+            show: ['table', 'insert', 'update', 'details'],
+            regex: '',
+            type: 'text',
+        },
+        {
+            code: 'password',
+            name: '密码',
+            show: ['insert', 'update'],
+            regex: '',
+            type: 'password',
+        },
+        {
+            code: 'role',
+            name: '角色',
+            show: ['table', 'insert', 'update', 'details'],
+            regex: '',
+            type: 'select',
+            options: [{ code: 'admin', name: '管理员' }, { code: 'user', name: '用户' }]
+        },
+        {
+            code: 'description',
+            name: '描述',
+            show: ['table', 'insert', 'update', 'details'],
+            regex: '',
+            type: 'text',
+            multiLine: true,
+        }
     ],
-    rowValues: [],
+    data: [],
+
 })
 
 
 function create(state, action) { if (action.type != CREATE) return state; }
-function remove(state, action) { if (action.type != DELETE) return state; }
+function remove(state, action) {
+    return setStatus(state, action)
+}
 function update(state, action) { if (action.type != UPDATE) return state; }
 function retrieve(state, action) {
+    return setStatus(state, action)
+        .set('rowValues', action.rowValues);
+}
+
+function setStatus(state, action) {
     return state
         .set('state', action.state)
         .set('action', action.type)
         .set('error', action.error)
-        .set('rowValues', action.rowValues);
-
 }
 
 

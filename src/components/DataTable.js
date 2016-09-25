@@ -2,9 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import Paper from 'material-ui/Paper';
 import {Table, TableBody, TableHeader, TableFooter, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
+import Create from 'material-ui/svg-icons/content/add';
 import Delete from 'material-ui/svg-icons/content/remove';
 import Update from 'material-ui/svg-icons/content/create';
 import Details from 'material-ui/svg-icons/navigation/more-horiz';
+import Refresh from 'material-ui/svg-icons/navigation/refresh';
 import Pagination from './Pagination';
 
 
@@ -48,7 +50,12 @@ class DataTable extends Component {
                                     return <TableHeaderColumn key={e.code}>{e.name}</TableHeaderColumn>
                                 })
                             }
-                            <TableHeaderColumn>操作</TableHeaderColumn>
+                            <TableHeaderColumn>
+                                <IconButton tooltip='添加' ><Create /></IconButton>
+                                <IconButton tooltip='删除' ><Delete /></IconButton>
+                                <IconButton tooltip='修改' ><Update /></IconButton>
+                                <IconButton tooltip='刷新' onClick={() => this.props.retrieve() } ><Refresh /></IconButton>
+                            </TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody {...table.body} >
@@ -61,7 +68,7 @@ class DataTable extends Component {
                                         })
                                     }
                                     <TableRowColumn>
-                                        <IconButton><Delete /></IconButton>
+                                        <IconButton  onClick={() => this.props.delete([e['_id'] || e['id']]) } ><Delete /></IconButton>
                                         <IconButton><Update /></IconButton>
                                         <IconButton><Details /></IconButton>
                                     </TableRowColumn>

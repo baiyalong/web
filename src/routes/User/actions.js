@@ -13,13 +13,43 @@ import {
 
 
 export function create() { }
-export function remove() { }
+export function remove(params) {
+    if (params && params.state)
+        return Object.assign({}, params, {
+            type: DELETE,
+            error: errMsg(params.error)
+        })
+    return dispatch => {
+        if (!(Array.isArray(params) && params.length))
+            return dispatch(remove({
+                state: ERROR,
+                error: '查询参数错误！'
+            }))
+        return Request({
+            api: Api.user,
+            method: 'DELETE',
+            json: params
+        }, dispatch).then(res => {
+            if (res.error) return dispatch(remove({
+                state: ERROR,
+                error: res.error
+            }))
+            dispatch(remove({
+                state: SUCCESS
+            }))
+            dispatch(retrieve())
+        }).catch(err => dispatch(remove({
+            state: ERROR,
+            error: '网络错误！'
+        })))
+    }
+}
 export function update() { }
 export function retrieve(params) {
     if (params && params.state)
         return Object.assign({}, params, {
             type: RETRIEVE,
-            error: params.error ? params.error + (new Date()).toLocaleString() : undefined,
+            error: errMsg(params.error)
         })
     return dispatch => {
         // if (!(params && (params.search || params._id)))
@@ -44,4 +74,9 @@ export function retrieve(params) {
             error: '网络错误！'
         })))
     }
+}
+
+
+function errMsg(err) {
+    return err ? err + (new Date()).toLocaleString() : undefined
 }
