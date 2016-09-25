@@ -11,13 +11,25 @@ import Divider from 'material-ui/Divider';
 
 
 class DataTable extends Component {
+
+    componentDidMount() {
+        this.props.retrieve()
+    }
+
     render() {
         return (
             <Paper style={{ height: '100%' }}>
-                <SubHeader title={this.props.title} />
+                <SubHeader
+                    title= {this.props.title}
+                    create={() => this.props.create() }
+                    delete={() => this.props.delete() }
+                    update={() => this.props.update() }
+                    retrieve={(s) => this.props.retrieve(s) }
+                    error={this.props.error}
+                    />
                 <Divider />
                 <Table style={{ height: '100%' }}
-                    height={'600px'}
+                    // height={'600px'}
                     fixedHeader={true}
                     fixedFooter={true}
                     selectable={true}

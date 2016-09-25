@@ -2,15 +2,17 @@
 import Immutable from 'immutable'
 import {
     CREATE,
+    DELETE,
     UPDATE,
-    RETRIEVE_ONE,
-    RETRIEVE_MANY,
-    DELETE_ONE,
-    DELETE_MANY
+    RETRIEVE,
+    REQUEST,
+    SUCCESS,
+    ERROR
 } from './constants';
 
 const initState = Immutable.fromJS({
     state: null,    //request,success,error
+    action: null,    //create,delete,update,retrieve
     error: null,    //error message
     colNames: [
         { code: 'username', name: '用户名' },
@@ -20,21 +22,35 @@ const initState = Immutable.fromJS({
     rowValues: [],
 })
 
+
+function create(state, action) { if (action.type != CREATE) return state; }
+function remove(state, action) { if (action.type != DELETE) return state; }
+function update(state, action) { if (action.type != UPDATE) return state; }
+function retrieve(state, action) {
+    return state
+        .set('state', action.state)
+        .set('action', action.type)
+        .set('error', action.error)
+        .set('rowValues', action.rowValues);
+
+}
+
+
 function UserReducer(state = initState, action) {
     switch (action.type) {
-        // case LOGIN_REQUEST:
-        //     return state.set('isFetching', true).set('username', null).set('token', null).set('error', null)
-        // case LOGIN_SUCCESS:
-        //     return state.set('isFetching', false).set('username', action.username).set('token', action.token)
-        // case LOGIN_ERROR:
-        //     return state.set('isFetching', false).set('error', action.error)
-        default:
-            return state
+        case CREATE: return create(state, action);
+        case DELETE: return remove(state, action);
+        case UPDATE: return update(state, action);
+        case RETRIEVE: return retrieve(state, action);
+        default: return state;
     }
 }
 
-// const reducers = combineReducers({
-//     loginReducer
+// const UserReducer = combineReducers({
+//     create,
+//     remove,
+//     update,
+//     retrieve
 // })
 
 

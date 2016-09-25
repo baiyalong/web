@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import { push } from 'react-router-redux'
+import Api from '../../utils/api';
+import Request from '../../utils/request';
+import localStorage from '../../utils/localStorage';
 
 
 import {
@@ -27,7 +30,7 @@ export function loginSuccess(username, token) {
 export function loginError(error) {
     return {
         type: LOGIN_ERROR,
-        error
+        error: error + (new Date()).toLocaleString()
     }
 }
 
@@ -37,16 +40,15 @@ export function login(username, password) {
         if (username === '') return dispatch(loginError('用户名不能为空！'))
         if (password === '') return dispatch(loginError('密码不能为空！'))
         dispatch(loginRequest());
-        return fetch('/api/login', {
+        return Request({
+            api: Api.login,
             method: 'POST',
-            headers: { 'content-type': 'application/json; charset=utf-8' },
-            body: JSON.stringify({ username, password })
-        }).then(resp => resp.json())
-            .then(res => {
-                if (res.error) return dispatch(loginError(res.error))
-                dispatch(loginSuccess(res.username, res.token))
-                dispatch(push('/user'))
-            })
-            .catch(err => dispatch(loginError('网络错误！')))
+            json: { username, password }
+        }).then(res => {
+            if (res.error) return dispatch(loginError(res.error))
+            localStorage.token = res.token
+            dispatch(loginSuccess(res.username, res.token))
+            dispatch(push('/user'))
+        }).catch(err => dispatch(loginError('网络错误！')))
     }
 }

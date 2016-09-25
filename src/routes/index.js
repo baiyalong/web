@@ -2,7 +2,7 @@
 import RootLayout from '../layouts/RootLayout'
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
-import CounterRoute from './Counter'
+// import CounterRoute from './Counter'
 import LoginRoute from './Login'
 import UserRoute from './User'
 
@@ -20,7 +20,7 @@ export const createRoutes = (store) => ({
       component: CoreLayout,
       // indexRoute: UserRoute(store),
       childRoutes: [
-        CounterRoute(store),
+        // CounterRoute(store),
         UserRoute(store)
       ]
     }

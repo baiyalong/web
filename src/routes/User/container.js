@@ -1,15 +1,21 @@
 import { connect } from 'react-redux';
 // import { createSelector } from 'reselect';
 import UserView from './view';
-// import {getList} from './actions';
+import {create, remove, update, retrieve} from './actions';
 
 const mapStateToProps = state => ({
+    state: state.user.get('state'),
+    action: state.user.get('action'),
     error: state.user.get('error'),
-    // isFetching: state.login.get('isFetching')
+    colNames: state.user.get('colNames').toJS(),
+    rowValues: state.user.get('rowValues'),
 })
 
 const mapDispatchToProps = {
-    // getList
+    create,
+    remove,
+    update,
+    retrieve
 }
 
 const UserContainer = connect(
