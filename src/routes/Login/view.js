@@ -29,14 +29,17 @@ class LoginView extends Component {
     let password = this.refs.password.input.value;
     this.props.login(username, password)
   }
+  enter(e) {
+    if (e.key === 'Enter') this.login()
+  }
   render() {
     return (
       <div style={style.page}>
         <Paper style={style.paper}>
           <h1>{this.props.title}</h1>
           <br />
-          <TextField floatingLabelText="用户名" type='text' ref='username' />
-          <TextField floatingLabelText="密码" type='password' ref='password' />
+          <TextField floatingLabelText="用户名" type='text' ref='username' onKeyDown={this.enter.bind(this) } />
+          <TextField floatingLabelText="密码" type='password' ref='password' onKeyDown={this.enter.bind(this) } />
           <br />
           <br />
           <br />

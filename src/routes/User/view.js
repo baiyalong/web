@@ -6,7 +6,7 @@ import DataTable from '../../components/DataTable'
 class UserView extends Component {
     render() {
         return (
-            <DataTable />
+            <DataTable title='用户管理' />
         )
     }
 }

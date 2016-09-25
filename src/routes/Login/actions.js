@@ -45,7 +45,7 @@ export function login(username, password) {
             .then(res => {
                 if (res.error) return dispatch(loginError(res.error))
                 dispatch(loginSuccess(res.username, res.token))
-                dispatch(push('/home'))
+                dispatch(push('/user'))
             })
             .catch(err => dispatch(loginError('网络错误！')))
     }
