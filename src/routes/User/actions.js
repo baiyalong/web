@@ -30,7 +30,7 @@ export function retrieve(params) {
         return Request({
             api: Api.user,
             method: 'GET',
-        }).then(res => {
+        }, dispatch).then(res => {
             if (res.error) return dispatch(retrieve({
                 state: ERROR,
                 error: res.error

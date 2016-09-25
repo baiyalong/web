@@ -1,7 +1,9 @@
 import fetch from 'isomorphic-fetch';
 import localStorage from './localStorage';
+import {logoutAndRedirect} from '../routes/Login/actions';
 
-export default function request(params) {
+
+export default function request(params, dispatch) {
     return fetch(params.api, {
         method: params.method || 'GET',
         headers: Object.assign({}, params.headers, {
@@ -9,7 +11,10 @@ export default function request(params) {
             'authorization': 'Bearer ' + localStorage.token
         }),
         body: JSON.stringify(params.json)
-    }).then(resp => resp.json())
+    }).then(resp => {
+        if (dispatch && resp.status == 401) return dispatch(logoutAndRedirect())
+        return resp.json()
+    })
 }
 
 
