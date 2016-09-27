@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 // import { createSelector } from 'reselect';
 import LoginView from './view';
-import {login} from './actions';
+import {login,checkAuth} from './actions';
 
 const mapStateToProps = state => ({
     error: state.login.get('error'),
@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-    login
+    login,
+    checkAuth
 }
 
 const LoginContainer = connect(

@@ -56,7 +56,7 @@ export function login(username, password) {
                 return dispatch(loginError('Invalid token'))
             }
             dispatch(loginSuccess(res.username, res.token))
-            dispatch(push('/user'))
+            dispatch(push('user'))
         }).catch(err => dispatch(loginError('网络错误！')))
     }
 }
@@ -72,12 +72,31 @@ export function logout() {
 export function logoutAndRedirect() {
     return dispatch => {
         dispatch(logout())
-        dispatch(redirect('/login'))
+        dispatch(push('login'))
     }
 }
 
-export function redirect(path){
-    return dispatch =>{
-         dispatch(push(path))
+export function redirect(path) {
+    return dispatch => {
+        dispatch(push(path))
+    }
+}
+
+export function checkAuth() {
+    let path = window.location.pathname
+    return dispatch => {
+        let render = true;
+        if (localStorage.token) {
+            if (path == '/' || path == '/login') {
+                dispatch(push('user'))
+                render = false;
+            }
+        } else {
+            if (path != '/login') {
+                dispatch(push('login'))
+                render = false;
+            }
+        }
+        return render
     }
 }

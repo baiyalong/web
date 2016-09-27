@@ -1,4 +1,4 @@
-import CoreLayoutContainer from './container';
+import CoreLayoutView from './view';
 
 
-export default CoreLayoutContainer;
+export default CoreLayoutView;

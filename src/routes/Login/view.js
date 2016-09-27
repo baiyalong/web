@@ -24,6 +24,11 @@ const style = {
 
 
 class LoginView extends Component {
+
+  // // componentWillMount() {
+  //   this.props.checkAuth(this.props.route.path)
+  // }
+
   login() {
     let username = this.refs.username.input.value;
     let password = this.refs.password.input.value;
