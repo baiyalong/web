@@ -5,15 +5,15 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 
 
 
-class Header extends Component {
+class HeaderView extends Component {
   render() {
     return (
       <Toolbar>
         <ToolbarTitle text={this.props.title} />
         <ToolbarGroup>
-          <ToolbarTitle text="username" />
+          <ToolbarTitle text={this.props.username} />
           <ToolbarSeparator />
-          <IconButton tooltip='注销' >
+          <IconButton tooltip='注销' onClick={() => this.props.logoutAndRedirect() } >
             <Power />
           </IconButton>
         </ToolbarGroup>
@@ -22,15 +22,18 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
+HeaderView.propTypes = {
   title: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 }
 
-Header.defaultProps = {
+HeaderView.defaultProps = {
   title: '标题',
   username: '用户名',
 }
 
 
-export default Header;
+export default HeaderView;
+
+
+

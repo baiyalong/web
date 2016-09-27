@@ -3,7 +3,8 @@ import Immutable from 'immutable'
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    LOGOUT
 } from './constants';
 
 const initState = Immutable.fromJS({
@@ -21,6 +22,8 @@ function LoginReducer(state = initState, action) {
             return state.set('isFetching', false).set('username', action.username).set('token', action.token)
         case LOGIN_ERROR:
             return state.set('isFetching', false).set('error', action.error)
+        case LOGOUT:
+            return state.set('username', null).set('token', null)
         default:
             return state
     }

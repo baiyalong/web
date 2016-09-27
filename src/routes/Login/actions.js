@@ -3,12 +3,13 @@ import { push } from 'react-router-redux'
 import Api from '../../utils/api';
 import Request from '../../utils/request';
 import localStorage from '../../utils/localStorage';
-
+import jwtDecode from 'jwt-decode';
 
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGIN_ERROR
+    LOGIN_ERROR,
+    LOGOUT
 } from './constants';
 
 
@@ -20,6 +21,8 @@ export function loginRequest() {
 }
 
 export function loginSuccess(username, token) {
+    localStorage.token = token
+    localStorage.username = username
     return {
         type: LOGIN_SUCCESS,
         username,
@@ -28,6 +31,7 @@ export function loginSuccess(username, token) {
 }
 
 export function loginError(error) {
+    localStorage.clear()
     return {
         type: LOGIN_ERROR,
         error: error + (new Date()).toLocaleString()
@@ -46,9 +50,34 @@ export function login(username, password) {
             json: { username, password }
         }).then(res => {
             if (res.error) return dispatch(loginError(res.error))
-            localStorage.token = res.token
+            try {
+                var decode = jwtDecode(res.token);
+            } catch (err) {
+                return dispatch(loginError('Invalid token'))
+            }
             dispatch(loginSuccess(res.username, res.token))
             dispatch(push('/user'))
         }).catch(err => dispatch(loginError('网络错误！')))
+    }
+}
+
+
+export function logout() {
+    localStorage.clear()
+    return {
+        type: LOGOUT
+    }
+}
+
+export function logoutAndRedirect() {
+    return dispatch => {
+        dispatch(logout())
+        dispatch(redirect('/login'))
+    }
+}
+
+export function redirect(path){
+    return dispatch =>{
+         dispatch(push(path))
     }
 }
