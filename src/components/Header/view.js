@@ -2,10 +2,13 @@ import React, {Component, PropTypes} from 'react';
 import IconButton from 'material-ui/IconButton';
 import Power from 'material-ui/svg-icons/action/power-settings-new';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-
+import Confirm from '../Confirm';
 
 
 class HeaderView extends Component {
+  logout(){
+    
+  }
   render() {
     return (
       <Toolbar>
