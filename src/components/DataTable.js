@@ -1,13 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import Paper from 'material-ui/Paper';
 import {Table, TableBody, TableHeader, TableFooter, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import SubHeader from './SubHeader';
 import IconButton from 'material-ui/IconButton';
 import Delete from 'material-ui/svg-icons/content/remove';
 import Update from 'material-ui/svg-icons/content/create';
 import Details from 'material-ui/svg-icons/navigation/more-horiz';
-import Divider from 'material-ui/Divider';
-
+import Pagination from './Pagination';
 
 
 class DataTable extends Component {
@@ -17,29 +15,33 @@ class DataTable extends Component {
     }
 
     render() {
+        const table = {
+            table: {
+                // height:'600px'
+                fixedHeader: true,
+                fixedFooter: true,
+                selectable: true,
+                multiSelectable: true,
+            },
+            header: {
+                displaySelectAll: true,
+                adjustForCheckbox: true,
+                enableSelectAll: true,
+            },
+            body: {
+                displayRowCheckbox: true,
+                deselectOnClickaway: false,
+                showRowHover: true,
+                stripedRows: true,
+            },
+            footer: {
+                adjustForCheckbox: true,
+            }
+        }
         return (
             <Paper style={{ height: '100%' }}>
-                <SubHeader
-                    title= {this.props.title}
-                    create={() => this.props.create() }
-                    delete={() => this.props.delete() }
-                    update={() => this.props.update() }
-                    retrieve={(s) => this.props.retrieve(s) }
-                    error={this.props.error}
-                    />
-                <Divider />
-                <Table style={{ height: '100%' }}
-                    // height={'600px'}
-                    fixedHeader={true}
-                    fixedFooter={true}
-                    selectable={true}
-                    multiSelectable={true}
-                    >
-                    <TableHeader
-                        displaySelectAll={true}
-                        adjustForCheckbox={true}
-                        enableSelectAll={true}
-                        >
+                <Table style={{ height: '100%' }} {...table.table} >
+                    <TableHeader {...table.header} >
                         <TableRow>
                             {
                                 this.props.colNames.map(e => {
@@ -49,12 +51,7 @@ class DataTable extends Component {
                             <TableHeaderColumn>操作</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody
-                        displayRowCheckbox={true}
-                        deselectOnClickaway={false}
-                        showRowHover={true}
-                        stripedRows={true}
-                        >
+                    <TableBody {...table.body} >
                         {
                             this.props.rowValues.map(e => {
                                 return <TableRow key={e['_id'] || e['id']}>
@@ -64,26 +61,18 @@ class DataTable extends Component {
                                         })
                                     }
                                     <TableRowColumn>
-                                        <IconButton>
-                                            <Delete />
-                                        </IconButton>
-                                        <IconButton>
-                                            <Update />
-                                        </IconButton>
-                                        <IconButton>
-                                            <Details />
-                                        </IconButton>
+                                        <IconButton><Delete /></IconButton>
+                                        <IconButton><Update /></IconButton>
+                                        <IconButton><Details /></IconButton>
                                     </TableRowColumn>
                                 </TableRow>
                             })
                         }
                     </TableBody>
-                    <TableFooter
-                        adjustForCheckbox={true}
-                        >
+                    <TableFooter {...table.footer} >
                         <TableRow>
                             <TableRowColumn colSpan="3" style={{ textAlign: 'right' }}>
-                                pagination
+                                <Pagination />
                             </TableRowColumn>
                         </TableRow>
                     </TableFooter>

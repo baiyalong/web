@@ -1,23 +1,26 @@
 import React, {Component, PropTypes} from 'react';
-import DataTable from '../../components/DataTable'
+import Content from '../../components/Content'
 
 
 
 class UserView extends Component {
     render() {
+
+        const content = {
+            title: '用户管理',
+            state: this.props.state,
+            action: this.props.action,
+            error: this.props.error,
+            colNames: this.props.colNames,
+            rowValues: this.props.rowValues,
+            create: () => this.props.create(),
+            delete: () => this.props.remove(),
+            update: () => this.props.update(),
+            retrieve: (s) => this.props.retrieve(s),
+        }
+
         return (
-            <DataTable
-                title='用户管理'
-                create={() => this.props.create() }
-                delete={() => this.props.remove() }
-                update={() => this.props.update() }
-                retrieve={(s) => this.props.retrieve(s) }
-                state={this.props.state}
-                action={this.props.action}
-                error={this.props.error}
-                colNames={this.props.colNames}
-                rowValues={this.props.rowValues}
-                />
+            <Content {...content} />
         )
     }
 }

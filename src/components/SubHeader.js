@@ -8,7 +8,7 @@ import Refresh from 'material-ui/svg-icons/navigation/refresh';
 import Retrieve from 'material-ui/svg-icons/action/search';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
-import Snackbar from 'material-ui/Snackbar';
+
 
 
 class SubHeader extends Component {
@@ -40,11 +40,6 @@ class SubHeader extends Component {
             </IconButton>
           </ToolbarGroup>
         </Toolbar>
-        <Snackbar
-          action='错误'
-          open={!!this.props.error}
-          message={this.props.error || ''}
-          />
       </div>
     )
   }
