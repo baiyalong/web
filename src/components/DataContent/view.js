@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import SubHeader from './SubHeader';
-import DataTable from './DataTable';
-import Comfirm from './Confirm';
-import Alert from './Alert';
-import Modal from './Modal';
+import SubHeader from '../SubHeader';
+import DataTable from '../DataTable';
+import Comfirm from '../Confirm';
+import Alert from '../Alert';
+import Modal from '../Modal';
 
 class Content extends Component {
 

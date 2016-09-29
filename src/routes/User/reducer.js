@@ -48,6 +48,13 @@ const initState = Immutable.fromJS({
         }
     ],
     data: [],
+    //
+    colNames: [
+        { code: 'username', name: '用户名' },
+        { code: 'role', name: '角色' },
+        { code: 'description', name: '描述' }
+    ],
+    rowValues: []
 
 })
 
