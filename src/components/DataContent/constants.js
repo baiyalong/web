@@ -1,8 +1,16 @@
-export default (module) => {
+export default (module = 'DataContent') => {
     function constant(action) {
         return module + '/' + action;
     }
-    var actions = ['INSERT', 'DELETE', 'UPDATE', 'RETRIEVE', 'REQUEST', 'SUCCESS', 'ERROR']
+    var actions = [
+        'INSERT',
+        'DELETE',
+        'UPDATE',
+        'RETRIEVE',
+        'REQUEST',
+        'SUCCESS',
+        'ERROR'
+    ]
     var constants = {}
     actions.forEach(e => constants[e] = constant(e))
     return constants;
