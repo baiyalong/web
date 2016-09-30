@@ -24,18 +24,15 @@ class Content extends Component {
     const content = {
       header: {
         title: this.props.title,
-        create: () => this.props.create(),
-        delete: (a) => this.props.remove(a),
-        update: () => this.props.update(),
-        retrieve: (s) => this.props.retrieve(s),
+        retrieve: (e) => this.props.retrieve(e),
       },
       table: {
-        colNames: this.props.colNames,
-        rowValues: this.props.rowValues,
-        create: () => this.props.create(),
-        delete: (a) => this.deleteComfirm(a),
-        update: () => this.props.update(),
-        retrieve: (s) => this.props.retrieve(s),
+        dict: this.props.dict,
+        data: this.props.data,
+        create: (e) => this.props.create(e),
+        delete: (e) => this.deleteComfirm(e),
+        update: (e) => this.props.update(e),
+        retrieve: (e) => this.props.retrieve(e),
       },
       confirm: {
         open: this.state.confirm,

@@ -1,6 +1,6 @@
 import constants from './constants';
 import initState from './state';
-import reducerCreator from '../../utils/creator/reducer';
+import reducerCreator from '../../creator/reducer';
 
 
-export default (state = initState, action) => reducerCreator(...args, constants)
+export default reducerCreator(constants, initState)

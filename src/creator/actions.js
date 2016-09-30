@@ -1,7 +1,7 @@
-import request from '../../utils/request';
+import request from '../utils/request';
 
 
-export default (json, state, params, constants) => {
+export default constants => (json, state, params) => {
     if (state)
         return Object.assign({}, state, {
             type: params.type,

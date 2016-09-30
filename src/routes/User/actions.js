@@ -1,8 +1,8 @@
 import api from '../../utils/api';
 import constants from './constants';
-import actionCreator from '../../utils/creator/actions';
+import actionCreator from '../../creator/actions';
 
-const action = (...args) => actionCreator(...args, constants)
+const action = actionCreator(constants)
 
 export function create(json, state) {
     return action(json, state, {

@@ -1,4 +1,4 @@
-import constantsCreator from '../../utils/creator/constants'
+import constantsCreator from '../../creator/constants'
 
 
 export default constantsCreator('user')

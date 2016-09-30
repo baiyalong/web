@@ -46,8 +46,9 @@ class DataTable extends Component {
                     <TableHeader {...table.header} >
                         <TableRow>
                             {
-                                this.props.colNames.map(e => {
-                                    return <TableHeaderColumn key={e.code}>{e.name}</TableHeaderColumn>
+                                this.props.dict.map(e => {
+                                    if (e.show.includes('table'))
+                                        return <TableHeaderColumn key={e.code}>{e.name}</TableHeaderColumn>
                                 })
                             }
                             <TableHeaderColumn>
@@ -60,11 +61,17 @@ class DataTable extends Component {
                     </TableHeader>
                     <TableBody {...table.body} >
                         {
-                            this.props.rowValues.map(e => {
+                            this.props.data.map(e => {
                                 return <TableRow key={e['_id'] || e['id']}>
                                     {
-                                        this.props.colNames.map(el => {
-                                            return <TableRowColumn key={el.code}>{e[el.code]}</TableRowColumn>
+                                        this.props.dict.map(el => {
+                                            var value = e[el.code];
+                                            if (el.type == 'select') {
+                                                var option = el.options.find(o => o.code == value)
+                                                value = option && option.name
+                                            }
+                                            if (el.show.includes('table'))
+                                                return <TableRowColumn key={el.code}>{value}</TableRowColumn>
                                         })
                                     }
                                     <TableRowColumn>
@@ -90,17 +97,17 @@ class DataTable extends Component {
 }
 
 DataTable.propTypes = {
-    // colNames: PropTypes.arry.isRequired,
-    // rowValues: PropTypes.arry.isRequired,
+    // dict: PropTypes.arry.isRequired,
+    // data: PropTypes.arry.isRequired,
 }
 
 DataTable.defaultProps = {
-    colNames: [
+    dict: [
         // { code: 'col1', name: '第一列' },
         // { code: 'col2', name: '第二列' },
         // { code: 'col3', name: '第三列' }
     ],
-    rowValues: [
+    data: [
         // { _id: '1', col1: 1, col2: 2, col3: 3 },
         // { _id: '2', col1: 2, col2: 2, col3: 3 },
         // { _id: '3', col1: 3, col2: 2, col3: 3 },

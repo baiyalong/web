@@ -2,7 +2,6 @@ import fetch from 'isomorphic-fetch';
 import { push } from 'react-router-redux'
 import Api from '../../utils/api';
 import Request from '../../utils/request';
-import localStorage from '../../utils/localStorage';
 import jwtDecode from 'jwt-decode';
 
 import {

@@ -1,4 +1,4 @@
-import stateCreator from '../../utils/creator/state'
+import stateCreator from '../../creator/state'
 
 
 const initState = {

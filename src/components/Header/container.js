@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 // import { createSelector } from 'reselect';
 import HeaderView from './view';
 import {logoutAndRedirect} from '../../routes/Login/actions';
-import localStorage from '../../utils/localStorage';
 
 const mapStateToProps = state => ({
     username: state.login && state.login.get('username')||localStorage.username,

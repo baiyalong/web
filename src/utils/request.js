@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import localStorage from './localStorage';
 import {logoutAndRedirect} from '../routes/Login/actions';
 
 
