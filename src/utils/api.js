@@ -1,10 +1,10 @@
 
 
-const Api = {
+const api = {
     login: '/api/login',
     user: '/api/user',
 }
 
-Object.freeze(Api)
+Object.freeze(api)
 
-export default Api;
+export default api;

@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
     state: state.user.get('state'),
     action: state.user.get('action'),
     error: state.user.get('error'),
-    colNames: state.user.get('colNames').toJS(),
-    rowValues: state.user.get('rowValues'),
+    dict: state.user.get('dict').toJS(),
+    data: state.user.get('data'),
 })
 
 const mapDispatchToProps = {

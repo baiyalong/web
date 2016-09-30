@@ -1,15 +1,5 @@
-
-// export const REQUEST = 'User/REQUEST';
-// export const SUCCESS = 'User/SUCCESS';
-// export const ERROR = 'User/ERROR';
-
-export const CREATE = 'User/CREATE';
-export const DELETE = 'User/DELETE';
-export const UPDATE = 'User/UPDATE';
-export const RETRIEVE = 'User/RETRIEVE';
+import constantsCreator from '../../utils/creator/constants'
 
 
-export const REQUEST = 'User/REQUEST';
-export const SUCCESS = 'User/SUCCESS';
-export const ERROR = 'User/ERROR';
+export default constantsCreator('user')
 
