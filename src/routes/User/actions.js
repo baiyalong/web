@@ -11,6 +11,7 @@ export function create(json, state) {
         api: api.user,
         method: 'POST',
         data: false,
+        refresh: retrieve,
         validate: function (json) {
 
         }
@@ -24,6 +25,7 @@ export function remove(json, state) {
         api: api.user,
         method: 'DELETE',
         data: false,
+        refresh: retrieve,
         validate: function (json) {
             if (!(Array.isArray(json) && json.length))
                 return '参数错误！'
@@ -38,6 +40,7 @@ export function update(json, state) {
         api: api.user,
         method: 'PUT',
         data: false,
+        refresh: retrieve,
         validate: function (json) {
 
         }

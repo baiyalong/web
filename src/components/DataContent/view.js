@@ -9,14 +9,22 @@ class Content extends Component {
 
   constructor() {
     super()
-    this.state = { confirm: false, deleteArr: null }
+    this.state = { modal: false, action: null, item: null }
   }
-  deleteComfirm(a) {
-    this.setState({ confirm: true, deleteArr: a })
-  }
-  delete(b) {
-    if (b) this.props.delete(this.state.deleteArr)
-    this.setState({ confirm: false, deleteArr: null })
+
+  delete() { }
+  update() { }
+  retrieve() { }
+
+  callback(values) {
+    this.setState({ modal: false })
+    if (values) {
+      this.state.action == 'delete'
+        ?
+        this.props.remove(this.state.item)
+        :
+        this.props[this.state.action](values)
+    }
   }
 
 
@@ -29,8 +37,8 @@ class Content extends Component {
       table: {
         dict: this.props.dict,
         data: this.props.data,
-        create: (e) => this.props.create(e),
-        delete: (e) => this.deleteComfirm(e),
+        create: () => this.setState({ modal: true, action: 'create' }),
+        delete: (e) => this.setState({ modal: true, action: 'delete', item: e }),
         update: (e) => this.props.update(e),
         retrieve: (e) => this.props.retrieve(e),
       },
@@ -39,6 +47,14 @@ class Content extends Component {
         title: this.props.title + '  删除',
         content: '确认要删除吗？',
         callback: (b) => this.delete(b)
+      },
+      modal: {
+        open: this.state.modal,
+        action: this.state.action,
+        item: this.state.item,
+        title: this.props.title,
+        dict: this.props.dict,
+        callback: (v) => this.callback(v)
       }
     }
 
@@ -48,7 +64,7 @@ class Content extends Component {
         <DataTable {...content.table} />
         <Comfirm {...content.confirm} />
         <Alert error={this.props.error} />
-        <Modal />
+        <Modal {...content.modal} />
       </div>
     )
   }

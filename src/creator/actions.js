@@ -27,6 +27,7 @@ export default constants => (json, state, params) => {
             state.error = res.error;
             if (params.data) state.data = res
             dispatch(params.action(null, state))
+            if (params.refresh) dispatch(params.refresh())
         }).catch(err => dispatch(params.action(null, {
             status: constants.ERROR,
             error: '网络错误！'

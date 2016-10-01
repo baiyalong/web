@@ -23,7 +23,7 @@ const initState = {
             show: ['table', 'insert', 'update', 'details'],
             regex: '',
             type: 'select',
-            options: [{ code: 'admin', name: '管理员' }, { code: 'user', name: '用户' }]
+            options: [{ value: 'admin', name: '管理员' }, { value: 'user', name: '用户' }]
         },
         {
             code: 'description',
@@ -31,7 +31,7 @@ const initState = {
             show: ['table', 'insert', 'update', 'details'],
             regex: '',
             type: 'text',
-            multiLine: true,
+            rows: 2,
         }
     ]
 }

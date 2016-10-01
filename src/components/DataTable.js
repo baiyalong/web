@@ -12,8 +12,22 @@ import Pagination from './Pagination';
 
 class DataTable extends Component {
 
+    constructor() {
+        super()
+        this.state = {
+            selected: []
+        }
+    }
     componentDidMount() {
         this.props.retrieve()
+    }
+
+    reselect() {
+        var selected = []
+        for (var id in this.refs) {
+            if (this.refs[id].props.selected) selected.push(id)
+        }
+        this.setState({ selected })
     }
 
     render() {
@@ -34,7 +48,7 @@ class DataTable extends Component {
                 displayRowCheckbox: true,
                 deselectOnClickaway: false,
                 showRowHover: true,
-                stripedRows: true,
+                // stripedRows: true,
             },
             footer: {
                 adjustForCheckbox: true,
@@ -52,9 +66,9 @@ class DataTable extends Component {
                                 })
                             }
                             <TableHeaderColumn>
-                                <IconButton tooltip='添加' ><Create /></IconButton>
-                                <IconButton tooltip='删除' ><Delete /></IconButton>
-                                <IconButton tooltip='修改' ><Update /></IconButton>
+                                <IconButton tooltip='添加' onClick={() => { this.reselect(); this.props.create(); } } ><Create /></IconButton>
+                                <IconButton tooltip='删除' onClick={() => { this.reselect(); this.props.delete(this.state.selected); } } ><Delete /></IconButton>
+                                <IconButton tooltip='修改' onClick={() => { this.reselect(); this.props.update(this.state.selected); } } ><Update /></IconButton>
                                 <IconButton tooltip='刷新' onClick={() => this.props.retrieve() } ><Refresh /></IconButton>
                             </TableHeaderColumn>
                         </TableRow>
@@ -62,12 +76,12 @@ class DataTable extends Component {
                     <TableBody {...table.body} >
                         {
                             this.props.data.map(e => {
-                                return <TableRow key={e['_id'] || e['id']}>
+                                return <TableRow key={e['_id'] || e['id']} ref={e['_id'] || e['id']} selected={this.state.selected.includes(e['_id'] || e['id']) } >
                                     {
                                         this.props.dict.map(el => {
                                             var value = e[el.code];
                                             if (el.type == 'select') {
-                                                var option = el.options.find(o => o.code == value)
+                                                var option = el.options.find(o => o.value == value)
                                                 value = option && option.name
                                             }
                                             if (el.show.includes('table'))
