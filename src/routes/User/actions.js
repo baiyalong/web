@@ -48,10 +48,17 @@ export function update(json, state) {
 }
 
 export function retrieve(json, state) {
-    return action(json, state, {
+    return action(undefined, state, {
         action: retrieve,
         type: constants.RETRIEVE,
-        api: api.user,
+        api: api.user + ((json) => {
+            if (!json) return '';
+            var query = '?'
+            for (var j in json) {
+                query += (j + '=' + encodeURIComponent(json[j]) + '&')
+            }
+            return query.slice(0, -1)
+        })(json),
         method: 'GET',
         data: true,
         validate: function (json) {
