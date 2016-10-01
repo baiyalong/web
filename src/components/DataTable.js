@@ -5,29 +5,23 @@ import IconButton from 'material-ui/IconButton';
 import Create from 'material-ui/svg-icons/content/add';
 import Delete from 'material-ui/svg-icons/content/remove';
 import Update from 'material-ui/svg-icons/content/create';
-import Details from 'material-ui/svg-icons/navigation/more-horiz';
+import Detail from 'material-ui/svg-icons/navigation/more-horiz';
 import Refresh from 'material-ui/svg-icons/navigation/refresh';
 import Pagination from './Pagination';
 
 
 class DataTable extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            selected: []
-        }
-    }
     componentDidMount() {
         this.props.retrieve()
     }
 
-    reselect() {
-        var selected = []
+    selected() {
+        var arr = []
         for (var id in this.refs) {
-            if (this.refs[id].props.selected) selected.push(id)
+            if (this.refs[id].props.selected) arr.push(id)
         }
-        this.setState({ selected })
+        return arr
     }
 
     render() {
@@ -66,9 +60,9 @@ class DataTable extends Component {
                                 })
                             }
                             <TableHeaderColumn>
-                                <IconButton tooltip='添加' onClick={() => { this.reselect(); this.props.create(); } } ><Create /></IconButton>
-                                <IconButton tooltip='删除' onClick={() => { this.reselect(); this.props.delete(this.state.selected); } } ><Delete /></IconButton>
-                                <IconButton tooltip='修改' onClick={() => { this.reselect(); this.props.update(this.state.selected); } } ><Update /></IconButton>
+                                <IconButton tooltip='添加' onClick={() => { this.props.create(); } } ><Create /></IconButton>
+                                <IconButton tooltip='删除' onClick={() => { this.props.delete(this.selected()); } } ><Delete /></IconButton>
+                                <IconButton tooltip='修改' onClick={() => { this.props.update({ _id: this.selected() }); } } ><Update /></IconButton>
                                 <IconButton tooltip='刷新' onClick={() => this.props.retrieve() } ><Refresh /></IconButton>
                             </TableHeaderColumn>
                         </TableRow>
@@ -76,7 +70,7 @@ class DataTable extends Component {
                     <TableBody {...table.body} >
                         {
                             this.props.data.map(e => {
-                                return <TableRow key={e['_id'] || e['id']} ref={e['_id'] || e['id']} selected={this.state.selected.includes(e['_id'] || e['id']) } >
+                                return <TableRow key={e['_id']} ref={e['_id']} >
                                     {
                                         this.props.dict.map(el => {
                                             var value = e[el.code];
@@ -89,9 +83,9 @@ class DataTable extends Component {
                                         })
                                     }
                                     <TableRowColumn>
-                                        <IconButton  onClick={() => this.props.delete([e['_id'] || e['id']]) } ><Delete /></IconButton>
-                                        <IconButton><Update /></IconButton>
-                                        <IconButton><Details /></IconButton>
+                                        <IconButton onClick={() => this.props.delete([e['_id']]) } ><Delete /></IconButton>
+                                        <IconButton onClick={() => this.props.update(Object.assign(e, { _id: [e._id] })) } ><Update /></IconButton>
+                                        <IconButton onClick={() => this.props.detail(e) } ><Detail /></IconButton>
                                     </TableRowColumn>
                                 </TableRow>
                             })

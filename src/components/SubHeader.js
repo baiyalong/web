@@ -8,6 +8,9 @@ import TextField from 'material-ui/TextField';
 
 class SubHeader extends Component {
 
+  search() {
+    return this.refs.search.input.value
+  }
   render() {
     return (
       <div>
@@ -15,7 +18,7 @@ class SubHeader extends Component {
           <ToolbarTitle text={this.props.title} />
           <ToolbarGroup>
             <TextField name='search' ref='search' />
-            <IconButton tooltip='查询' onClick={() => this.props.retrieve({ search: this.refs.search.input.value }) } >
+            <IconButton tooltip='查询' onClick={() => this.props.retrieve() } >
               <Retrieve />
             </IconButton>
           </ToolbarGroup>

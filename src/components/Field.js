@@ -7,7 +7,11 @@ import MenuItem from 'material-ui/MenuItem';
 class Field extends Component {
     constructor() {
         super()
-        this.state = { select: null }
+        this.state = { value: null }
+    }
+
+    componentWillMount() {
+        this.setState({ value: this.props.value })
     }
 
     render() {
@@ -17,17 +21,22 @@ class Field extends Component {
                 multiLine={!!this.props.rows}
                 rows={this.props.rows}
                 floatingLabelText={this.props.name}
-                onChange={(event, value) =>
+                disabled={this.props.disabled}
+                value={this.state.value}
+                onChange={(event, value) => {
+                    this.setState({ value });
                     this.props.onChange(value)
-                }
+                } }
                 />
         )
         if (this.props.type == 'select') return (
             <SelectField
                 value={this.state.select}
                 floatingLabelText={this.props.name}
+                disabled={this.props.disabled}
+                value={this.state.value}
                 onChange={(event, index, value) => {
-                    this.setState({ select: value });
+                    this.setState({ value });
                     this.props.onChange(value);
                 } }
                 >
@@ -39,6 +48,11 @@ class Field extends Component {
             </SelectField>
         )
     }
+}
+
+
+Field.defaultProps = {
+    value: '',
 }
 
 export default Field

@@ -23,7 +23,6 @@ class Modal extends Component {
   }
 
   render() {
-
     const content = (
       <div>
         {
@@ -40,7 +39,12 @@ class Modal extends Component {
                   justifyContent: 'center'
                 }}
                 >
-                <Field {...e } onChange={(value) => this.state.values[e.code] = value } />
+                <Field
+                  {...e }
+                  onChange={(value) => this.state.values[e.code] = value }
+                  disabled={this.props.action == 'detail'}
+                  value={((v) => v == null ? '' : v)(this.props.item && this.props.item[e.code]) }
+                  />
               </div>
             })
         }
@@ -51,13 +55,19 @@ class Modal extends Component {
       <FlatButton
         label="取消"
         primary={true}
-        onTouchTap={() => this.props.callback() }
+        onTouchTap={() => {
+          this.props.callback();
+          this.setState({ values: {} });
+        } }
         />,
       <FlatButton
         label="确定"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={() => this.props.callback(this.state.values) }
+        onTouchTap={() => {
+          this.props.callback(this.state.values);
+          this.setState({ values: {} });
+        } }
         />,
     ];
 
@@ -66,7 +76,10 @@ class Modal extends Component {
       actions: actions,
       modal: this.props.modal,
       open: this.props.open,
-      onRequestClose: () => this.props.callback(),
+      onRequestClose: () => {
+        this.props.callback();
+        this.setState({ values: {} });
+      },
       autoScrollBodyContent: this.props.action != 'delete'
     }
 

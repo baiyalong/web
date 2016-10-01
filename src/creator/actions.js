@@ -3,7 +3,7 @@ import request from '../utils/request';
 
 export default constants => (json, state, params) => {
     if (state)
-        return Object.assign({}, state, {
+        return Object.assign(state, {
             type: params.type,
             error: state.error ? state.error + ' - ' + (new Date()).toLocaleString() : null
         })
