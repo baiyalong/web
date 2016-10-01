@@ -49,8 +49,8 @@ class DataTable extends Component {
             }
         }
         return (
-            <Paper style={{ height: '100%' }}>
-                <Table style={{ height: '100%' }} {...table.table} >
+            <Paper>
+                <Table {...table.table} >
                     <TableHeader {...table.header} >
                         <TableRow>
                             {

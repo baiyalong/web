@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton';
 import Power from 'material-ui/svg-icons/action/power-settings-new';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import Confirm from '../Confirm';
-
+import {cyan50} from 'material-ui/styles/colors';
 
 class HeaderView extends Component {
   constructor() {
@@ -27,14 +27,16 @@ class HeaderView extends Component {
 
     return (
       <div>
-        <Toolbar>
+        <Toolbar style={{ backgroundColor: cyan50 }}>
           <ToolbarTitle text={this.props.title} />
-          <ToolbarGroup>
+          <ToolbarGroup >
             <ToolbarTitle text={this.props.username} />
             <ToolbarSeparator />
-            <IconButton tooltip='注销' onClick={ () => this.logoutConfirm() } >
-              <Power />
-            </IconButton>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }} >
+              <IconButton tooltip='注销' onClick={ () => this.logoutConfirm() } >
+                <Power />
+              </IconButton>
+            </div>
           </ToolbarGroup>
         </Toolbar>
         <Confirm {...confirm} />

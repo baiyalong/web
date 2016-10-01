@@ -51,7 +51,7 @@ class Content extends Component {
     }
 
     return (
-      <div style={{ height: '100%' }}>
+      <div style={{ height: '100%', }}>
         <SubHeader {...content.header} />
         <DataTable {...content.table} />
         <Alert error={this.props.error} />
