@@ -5,6 +5,9 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 
+import io from './utils/io';
+
+
 // ========================================================
 // Store and History Instantiation
 // ========================================================
