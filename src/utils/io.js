@@ -7,8 +7,8 @@ var socket = io(server.addr)
 fingerprint(fp => {
     console.log(fp)
     socket.on('connect', () => {
-        socket.emit('register', {
-            fingerprint: fp,
+        socket.emit('user-connect', {
+            id: fp,
             role: 'admin'
         })
     })
