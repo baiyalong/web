@@ -3,13 +3,13 @@ import Paper from 'material-ui/Paper';
 import Menus from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import Person from 'material-ui/svg-icons/social/person';
-import ContentLink from 'material-ui/svg-icons/content/link';
+import User from 'material-ui/svg-icons/social/group';
+import Idea from 'material-ui/svg-icons/image/wb-sunny';
+import Setting from 'material-ui/svg-icons/action/settings';
 import Divider from 'material-ui/Divider';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import Download from 'material-ui/svg-icons/file/file-download';
-import Delete from 'material-ui/svg-icons/action/delete';
+import AQI from 'material-ui/svg-icons/image/blur-on';
+import Warning from 'material-ui/svg-icons/alert/warning';
+import Account from 'material-ui/svg-icons/action/account-box';
 import FontIcon from 'material-ui/FontIcon';
 
 const style = {
@@ -27,14 +27,14 @@ class Menu extends Component {
         return (
             <Paper style={style.paper}>
                 <Menus>
-                    <MenuItem primaryText="用户管理" leftIcon={<Person />} />
-                    <MenuItem primaryText="模块2" leftIcon={<PersonAdd />} />
-                    <MenuItem primaryText="模块3" leftIcon={<ContentLink />} />
+                    <MenuItem primaryText="众创活动" leftIcon={<Idea />} />
+                    <MenuItem primaryText="用户管理" leftIcon={<User />} />
                     <Divider />
-                    <MenuItem primaryText="模块4" leftIcon={<ContentCopy />} />
-                    <MenuItem primaryText="模块5" leftIcon={<Download />} />
+                    <MenuItem primaryText="空气质量" leftIcon={<AQI />} />
+                    <MenuItem primaryText="预报预警" leftIcon={<Warning />} />
                     <Divider />
-                    <MenuItem primaryText="模块6" leftIcon={<Delete />} />
+                    <MenuItem primaryText="帐号管理" leftIcon={<Account />} />
+                    <MenuItem primaryText="系统设置" leftIcon={<Setting />} />
                 </Menus>
             </Paper>
         )

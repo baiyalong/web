@@ -5,7 +5,6 @@ class TableFooter extends Component {
   render() {
     return (
       <div>
-        pagination
       </div>
     )
   }
